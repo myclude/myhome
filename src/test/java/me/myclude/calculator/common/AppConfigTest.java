@@ -48,7 +48,6 @@ class AppConfigTest {
 
         //then
         assertThat(decText).isEqualTo(orgText);
-
     }
 
 }
