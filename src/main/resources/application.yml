@@ -1,0 +1,62 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    username: postgres
+    password: password
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/rest
+#    username: sa
+#    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    show-sql:  true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+         format_sql: true
+        
+        #jdbc:
+        #  lob:
+        #    non_contextual_creation: true
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true  # 객체화 시 받지 않아야 할 properties 가 존재할 경우 400 에러
+
+#decorator:
+#  datasource:
+#    datasource-proxy:
+#      logging: slf4j
+#      query:
+#        enable-logging: true
+#        log-level: debug
+
+logging:
+  level:
+    me:
+      myclude:
+        calculator: debug
+    org:
+      springframework:
+        security: debug
+#      hibernate:
+#        SQL: debug
+      type:
+        descriptor:
+          sql:
+            BasicBinder: trace
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
