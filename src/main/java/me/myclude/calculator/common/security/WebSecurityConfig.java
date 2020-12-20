@@ -22,11 +22,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring()
+//                .antMatchers("/resources/**").anyRequest();
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/greeting").permitAll()
+                    .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/resources/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -46,9 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select employee_number, password, enabled"
                         + "from promlusr "
                         + "where employee_number = ?")
-                .authoritiesByUsernameQuery("select lusr.employee_number, r.name  "
-                        + "from member_role mr inner join promlusr lusr on mr.member_id = lusr.member_id "
-                        + "inner join role r on mr.role_id = r.role_id "
-                        + "where employee_number = ?");
+                .authoritiesByUsernameQuery("SELECT LUSR.employee_number, R.name  "
+                        + "FROM member_role MR "
+                        + "INNER JOIN promlusr LUSR ON MR.member_id = LUSR.member_id "
+                        + "INNER JOIN role R ON MR.role_id = R.role_id "
+                        + "WHERE LUSR.employee_number = ?"
+                );
     }
 }

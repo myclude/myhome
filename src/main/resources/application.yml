@@ -9,7 +9,7 @@ spring:
   datasource:
     username: postgres
     password: password
-    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    url: jdbc:postgresql://127.0.0.1:15432/postgres
     driver-class-name: org.postgresql.Driver
 #  datasource:
 #    url: jdbc:h2:tcp://localhost/~/rest
