@@ -42,7 +42,6 @@ public class BoardController {
             Board board = optionalBoard.orElse(null);
             BoardDto boardDto = modelMapper.map(board, BoardDto.class);
             model.addAttribute("board", boardDto);
-
         }
 
         return "board/form";
