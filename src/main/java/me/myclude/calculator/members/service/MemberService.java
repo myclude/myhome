@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import me.myclude.calculator.members.entity.Member;
 import me.myclude.calculator.members.entity.MemberRole;
 import me.myclude.calculator.members.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -47,5 +49,13 @@ public class MemberService implements UserDetailsService {
         //
         return memberRepository.save(member);
 
+    }
+
+    /**
+     *  회원 조회
+     */
+    public Page<Member> findAll(Pageable pageable) {
+        //
+        return memberRepository.findAll(pageable);
     }
 }
