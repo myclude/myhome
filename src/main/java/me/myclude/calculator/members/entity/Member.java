@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@NoArgsConstructor @Builder @AllArgsConstructor
 @EqualsAndHashCode(of = "employeeNumber")
 @SequenceGenerator(
         name = "MEMBER_SEQ_GENERATOR",
@@ -44,10 +44,9 @@ public class Member {
     private String phoneNumber;
 
     @Column(name = "ENABLED")
-    private boolean enabled = true;
+    private boolean enabled;
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<MemberRole> roles = new ArrayList<>();
-
 }

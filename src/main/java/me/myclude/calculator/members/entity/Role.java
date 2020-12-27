@@ -11,6 +11,7 @@ import java.util.List;
 @Getter @Setter
 @Builder
 @NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Table(name = "role")
 public class Role {
 
@@ -20,6 +21,7 @@ public class Role {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     private List<MemberRole> roles = new ArrayList<>();
 

@@ -20,11 +20,10 @@ class MemberTest {
                 .deptCode("SDSR")
                 .phoneNumber("02-6296-4485")
                 .language("ko")
-                .enabled(true)
                 .build();
-        //when
 
-        //then
-        assertThat(member.getUsername()).isEqualTo("성낙건");
+        System.out.println(member.getPassword());
+
+        assertThat(member.getUsername()).isEqualTo("beans");
     }
 }
