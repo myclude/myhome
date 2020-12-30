@@ -23,6 +23,7 @@ public class Role {
 
     @JsonIgnore
     @OneToMany(mappedBy = "role")
+    @Builder.Default
     private List<MemberRole> roles = new ArrayList<>();
 
 }

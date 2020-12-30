@@ -48,5 +48,6 @@ public class Member {
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<MemberRole> roles = new ArrayList<>();
 }

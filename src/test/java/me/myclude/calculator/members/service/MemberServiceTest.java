@@ -1,11 +1,8 @@
 package me.myclude.calculator.members.service;
 
-import me.myclude.calculator.members.entity.Member;
-import me.myclude.calculator.members.entity.MemberRole;
-import me.myclude.calculator.members.entity.Role;
-import me.myclude.calculator.members.repository.MemberRepository;
-import me.myclude.calculator.members.repository.MemberRoleRepository;
-import me.myclude.calculator.members.repository.RoleRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import me.myclude.calculator.members.entity.Member;
+import me.myclude.calculator.members.entity.MemberRole;
+import me.myclude.calculator.members.entity.Role;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

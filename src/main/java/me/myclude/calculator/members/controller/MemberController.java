@@ -25,4 +25,9 @@ public class MemberController {
         model.addAttribute("members", pageMembers);
         return "board/members";
     }
+
+    @GetMapping("/memberform")
+    public String memberForm(Model model) {
+        return "board/memberform";
+    }
 }
