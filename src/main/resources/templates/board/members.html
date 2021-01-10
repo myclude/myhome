@@ -37,7 +37,7 @@
         <tr th:each="member : ${members.content}">
             <td th:text="${memberStat.index + 1}">1</td>
             <td th:text="${member.employeeNumber}">홍길동</td>
-            <td><a th:text="${member.username}" th:href="@{/board/form(id=${member.memberId})}">Mark</a></td>
+            <td><a th:text="${member.username}" th:href="@{/member/memberform(id=${member.memberId})}">Mark</a></td>
             <td th:text="${member.email}">nk.sung@gmail.com</td>
             <td th:text="${member.phoneNumber}">010-XXXX-XXXX</td>
         </tr>
@@ -51,7 +51,11 @@
                 <a class="page-link" href="#" th:href="@{/member/list(page=${members.pageable.pageNumber - 1}, searchText=${param.searchText})}"
                    tabindex="-1" aria-disabled="true">Previous</a>
             </li>
+            <li class="page-item disabled" th:if="${#lists.size(members.content) == 0}">
+            	<a class="page-link" href="#" >1</a>
+            </li>
             <li class="page-item" th:classappend="${i == members.pageable.pageNumber + 1} ? 'disabled' : ''"
+            	th:if="${#lists.size(members.content) != 0}"
                 th:each="i : ${#numbers.sequence(start, last)}">
                 <a class="page-link" href="#" th:text="${i}" th:href="@{/member/list(page=${i - 1}, searchText=${param.searchText})}">1</a>
             </li>

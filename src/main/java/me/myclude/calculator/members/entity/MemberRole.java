@@ -24,7 +24,6 @@ public class MemberRole {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
     //생성 메서드
     public static MemberRole createMember(Member member, Role role) {
 
@@ -34,4 +33,6 @@ public class MemberRole {
 
         return memberRole;
     }
+    
+    
 }

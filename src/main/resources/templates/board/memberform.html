@@ -8,52 +8,52 @@
 <main class="container">
     <h2>회원등록</h2>
     <div style="height: 10px"></div>
-    <form class="row g-3">
+    <form class="row g-3" action="#" th:action="@{/member/memberform}" th:object="${member}" method="post">
         <div class="col-md-6">
-            <label for="employeenumber" class="form-label">사번</label>
-            <input type="text" class="form-control" id="employeenumber" th:text="${}" required>
+            <label for="employeeNumber" class="form-label">사번</label>
+            <input type="text" class="form-control" id="employeeNumber" th:field="*{employeeNumber}" required>
         </div>
         <div class="col-md-6">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" required>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
         </div>
         <div class="col-md-6">
             <label for="username" class="form-label">이름</label>
-            <input type="text" class="form-control" id="username" placeholder="">
+            <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="">
         </div>
         <div class="col-md-6">
             <label for="email" class="form-label">E-MAIL</label>
-            <input type="email" class="form-control" id="email" required>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
         </div>
         <div class="col-md-6">
-            <label for="department" class="form-label">부서코드</label>
-            <input type="text" class="form-control" id="department" placeholder="">
+            <label for="deptCode" class="form-label">부서코드</label>
+            <input type="text" class="form-control" id="deptCode" th:field="*{deptCode}" placeholder="">
         </div>
         <div class="col-md-6">
             <label for="language" class="form-label">언어코드</label>
-            <input type="email" class="form-control" id="language" required>
+            <input type="text" class="form-control" id="language" th:field="*{language}" required>
         </div>
         <div class="col-md-6">
-            <label for="phone" class="form-label">전화번호</label>
-            <input type="text" class="form-control" id="phone">
+            <label for="phoneNumber" class="form-label">전화번호</label>
+            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
         </div>
         <div class="col-md-2">
             <label for="enabled" class="form-label">사용여부</label>
-            <select id="enabled" class="form-select">
-                <option selected>Y</option>
-                <option>N</option>
+            <select id="enabled" class="form-select" th:field="${member.enableString}">
+                <option th:each="en:${member.enabledCombo}" th:value="${en.name}" th:utext="${en.enable}">Y</option>
             </select>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="adminChecked">
-            <label class="form-check-label" for="adminChecked">admin</label>
+            <input class="form-check-input" type="checkbox" id="adminChecked" th:field="${member.adminChecked}">
+            <label class="form-check-label" for="adminChecked" th:checked="${member.adminChecked}">admin</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="userChecked">
-            <label class="form-check-label" for="userChecked">user</label>
+            <input class="form-check-input" type="checkbox" id="userChecked" th:field="${member.userChecked}">
+            <label class="form-check-label" for="userChecked" th:checked="${member.userChecked}">user</label>
         </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+        <div class="text-end">
+            <a type="button" class="btn btn-primary" th:href="@{/member/list}">취소</a>
+            <button type="submit" class="btn btn-primary">확인</button>
         </div>
     </form>
 </main>

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import me.myclude.calculator.members.dto.MemberDto;
 import me.myclude.calculator.members.entity.Member;
 import me.myclude.calculator.members.entity.MemberRole;
 import me.myclude.calculator.members.entity.Role;
@@ -45,8 +46,8 @@ class MemberServiceTest {
                 .build();
 
         Role saveRole = roleService.save(role);
-
-        Member member = Member.builder()
+        
+        MemberDto memberDto = MemberDto.builder()
                 .username("naggeon")
                 .email("nk.sung@gmail.com")
                 .employeeNumber(username)
@@ -56,7 +57,7 @@ class MemberServiceTest {
                 .phoneNumber("010-0000-0000")
                 .build();
 
-        Member saveMember = memberService.save(member);
+        Member saveMember = memberService.save(memberDto);
 
         MemberRole memberRole = MemberRole.createMember(saveMember, saveRole);
 

@@ -50,4 +50,8 @@ public class Member {
     @OneToMany(mappedBy = "member")
     @Builder.Default
     private List<MemberRole> roles = new ArrayList<>();
+    
+    public void updateRoles(List<MemberRole> roles) {
+    	this.roles = roles;
+    }
 }
