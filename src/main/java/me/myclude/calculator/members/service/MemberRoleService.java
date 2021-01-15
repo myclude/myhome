@@ -1,6 +1,7 @@
 package me.myclude.calculator.members.service;
 
 import lombok.RequiredArgsConstructor;
+import me.myclude.calculator.members.entity.Member;
 import me.myclude.calculator.members.entity.MemberRole;
 import me.myclude.calculator.members.repository.MemberRoleRepository;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,8 @@ public class MemberRoleService {
         return memberRoleRepository.save(memberRole);
     }
 
+    @Transactional
+    public void deleteByMember(Member member) {
+        memberRoleRepository.deleteByMember(member);
+    }
 }

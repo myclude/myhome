@@ -1,5 +1,6 @@
 package me.myclude.calculator.members.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +48,10 @@ public class MemberController {
     	
     	MemberDto memberDto = new MemberDto();
     	
-    	List<Enabled> enableds = List.of(Enabled.Y, Enabled.N);
-    			
+    	List<Enabled> enabled = new ArrayList<>();
+    	enabled.add(Enabled.Y);
+    	enabled.add(Enabled.N);
+
     	if(id != null) {
 	    
 	    	Optional<Member> optionalMember = memberService.searchById(id);
@@ -101,7 +104,7 @@ public class MemberController {
 
     	}
     	
-    	memberDto.setEnabledCombo(enableds);
+    	memberDto.setEnabledCombo(enabled);
     	model.addAttribute("member", memberDto);
     	
     	return "board/memberform";
@@ -118,8 +121,7 @@ public class MemberController {
         }
     	
     	memberService.save(memberDto);
-    	
-    	
+
     	return "redirect:/member/list";
     }
     

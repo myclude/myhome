@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor @Builder @AllArgsConstructor
 @EqualsAndHashCode(of = "employeeNumber")
 @SequenceGenerator(
