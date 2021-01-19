@@ -31,6 +31,11 @@ dependencies {
 
 	implementation 'org.modelmapper:modelmapper:2.3.1'
 
+	//webjar
+	compile 'org.webjars:webjars-locator-core:0.46'
+	compile 'org.webjars:bootstrap:4.5.3'
+	compile 'org.webjars:jquery:3.5.1'
+
 	////property 암호화
 	implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
 	implementation "org.bouncycastle:bcprov-jdk15on:1.64"
