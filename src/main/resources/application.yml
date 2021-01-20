@@ -8,17 +8,18 @@ server:
 
 spring:
   datasource:
-    username: postgres
-    password: password
-    url: jdbc:postgresql://127.0.0.1:15432/postgres
-    driver-class-name: org.postgresql.Driver
-#  datasource:
-#    url: jdbc:h2:tcp://localhost/~/rest
-#    username: sa
-#    password:
+    url: jdbc:h2:tcp://localhost/~/rest
+    username: ENC(Tt8SfpEX6/iMfh+RO7rMMw==)
+    password:
+    driver-class-name: org.h2.Driver
+    #  datasource:
+    #    username: postgres
+    #    password: password
+    #    url: jdbc:postgresql://127.0.0.1:15432/postgres
+    #    driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     open-in-view: false
     show-sql:  true
     hibernate:

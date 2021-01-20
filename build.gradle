@@ -23,7 +23,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-	runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+//	runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+	runtimeOnly 'com.h2database:h2:1.4.199'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	implementation 'org.projectlombok:lombok:1.18.16'
@@ -33,7 +34,7 @@ dependencies {
 
 	//webjar
 	compile 'org.webjars:webjars-locator-core:0.46'
-	compile 'org.webjars:bootstrap:4.5.3'
+	compile 'org.webjars:bootstrap:5.0.0-beta1'
 	compile 'org.webjars:jquery:3.5.1'
 
 	////property 암호화
@@ -49,7 +50,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api'
 	//testCompile 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params'
-	testRuntime 'com.h2database:h2'
+//	testRuntime 'com.h2database:h2'
 
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine'
 	//Security Test

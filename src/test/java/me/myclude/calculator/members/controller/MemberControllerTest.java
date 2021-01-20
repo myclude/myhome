@@ -1,11 +1,15 @@
 package me.myclude.calculator.members.controller;
 
 import me.myclude.calculator.common.BaseControllerTest;
+import me.myclude.calculator.members.entity.Role;
 import me.myclude.calculator.members.service.MemberService;
 import me.myclude.calculator.members.service.RoleService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -19,24 +23,25 @@ class MemberControllerTest extends BaseControllerTest {
     @Autowired
     RoleService roleService;
 
-//    @BeforeEach
-//    public void addRole() {
-//
-//        Role role = Role.builder()
-//                .name("ADMIN")
-//                .build();
-//
-//        Role role2 = Role.builder()
-//                .name("USER")
-//                .build();
-//
-//        roleService.save(role);
-//        roleService.save(role2);
-//
-//    }
+    @BeforeEach
+    public void addRole() {
+
+        Role role = Role.builder()
+                .name("ADMIN")
+                .build();
+
+        Role role2 = Role.builder()
+                .name("USER")
+                .build();
+
+        roleService.save(role);
+        roleService.save(role2);
+
+    }
 
     @Test
-    @WithMockUser(username="admin",roles={"USER","ADMIN"})
+    @WithUserDetails(value = "admin")
+    @DisplayName("샘플 테스트")
     public void sampleTestDo() throws Exception {
 
 //        MemberDto dto = MemberDto.builder()
