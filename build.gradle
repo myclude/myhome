@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.3.7.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+	//querydsl plugins 추가
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'me.myclude'
@@ -37,11 +39,15 @@ dependencies {
 	compile 'org.webjars:bootstrap:5.0.0-beta1'
 	compile 'org.webjars:jquery:3.5.1'
 
+	//querydsl 추가
+	implementation 'com.querydsl:querydsl-jpa'
+
 	////property 암호화
 	implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
 	implementation "org.bouncycastle:bcprov-jdk15on:1.64"
 
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
+
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude module: 'junit'
@@ -60,3 +66,24 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}
+//querydsl 추가 끝

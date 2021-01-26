@@ -40,20 +40,21 @@
         </div>
 
         <div class="col-md-6">
-            <label class="form-label" for="enabled">사용여부</label>
-            <select class="custom-select" id="enabled" th:field="${member.enableString}">
+            <label for="phoneNumber" class="form-label">사용여부</label>
+            <select class="form-select" aria-label="Default select example" id="enabled" th:field="${member.enableString}">
                 <option th:each="en:${member.enabledCombo}" th:value="${en.name}" th:utext="${en.enable}">Y</option>
             </select>
         </div>
 
+
         <div class="col-md-12">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="adminChecked" th:field="${member.adminChecked}">
-                <label class="custom-control-label" for="adminChecked" th:checked="${member.adminChecked}">admin</label>
+            <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" id="adminChecked" th:field="${member.adminChecked}">
+                <label class="form-check-label" for="adminChecked" th:checked="${member.adminChecked}">admin</label>
             </div>
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="userChecked" th:field="${member.userChecked}">
-                <label class="custom-control-label" for="userChecked" th:checked="${member.userChecked}">user</label>
+            <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" id="userChecked" th:field="${member.userChecked}">
+                <label class="form-check-label" for="userChecked" th:checked="${member.userChecked}">user</label>
             </div>
         </div>
 

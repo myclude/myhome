@@ -23,21 +23,21 @@ class MemberControllerTest extends BaseControllerTest {
     @Autowired
     RoleService roleService;
 
-    @BeforeEach
-    public void addRole() {
-
-        Role role = Role.builder()
-                .name("ADMIN")
-                .build();
-
-        Role role2 = Role.builder()
-                .name("USER")
-                .build();
-
-        roleService.save(role);
-        roleService.save(role2);
-
-    }
+//    @BeforeEach
+//    public void addRole() {
+//
+//        Role role = Role.builder()
+//                .name("ADMIN")
+//                .build();
+//
+//        Role role2 = Role.builder()
+//                .name("USER")
+//                .build();
+//
+//        roleService.save(role);
+//        roleService.save(role2);
+//
+//    }
 
     @Test
     @WithUserDetails(value = "admin")
