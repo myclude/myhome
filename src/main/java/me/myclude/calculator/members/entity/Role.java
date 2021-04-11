@@ -26,4 +26,8 @@ public class Role {
     @Builder.Default
     private List<MemberRole> roles = new ArrayList<>();
 
+    public Role(String name) {
+        this.name = name;
+    }
+
 }

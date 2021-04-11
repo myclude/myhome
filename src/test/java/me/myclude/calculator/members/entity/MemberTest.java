@@ -1,29 +1,49 @@
 package me.myclude.calculator.members.entity;
 
-import org.junit.jupiter.api.DisplayName;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+@SpringBootTest
+@Transactional
+@ActiveProfiles("test")
 class MemberTest {
 
+    @Autowired
+    EntityManager em;
+
     @Test
-    @DisplayName("빌드 테스트")
-    public void BuildTest() {
-        
-        //given
+    void contextTest() {
+
         Member member = Member.builder()
+                .username("5800871")
                 .employeeNumber("5800871")
-                .username("beans")
                 .email("nk.sung@gmail.com")
-                .password("1234")
-                .deptCode("SDSR")
-                .phoneNumber("02-6296-4485")
-                .language("ko")
+                .language("KO")
+                .enabled(true)
                 .build();
 
-        System.out.println(member.getPassword());
+        em.persist(member);
 
-        assertThat(member.getUsername()).isEqualTo("beans");
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QMember qMember = new QMember("m");
+
+        Member result = query
+                .selectFrom(qMember)
+                .fetchOne();
+
+        assertThat(result).isEqualTo(member);
+
+        if (result != null) {
+            assertThat(result.getMemberId()).isEqualTo(member.getMemberId());
+        }
     }
 }

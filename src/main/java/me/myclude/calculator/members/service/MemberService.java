@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +43,8 @@ public class MemberService implements UserDetailsService {
         Optional<Member> optionalMem = memberRepository.findByEmployeeNumber(username);
         Member member = optionalMem.orElseThrow(() -> new UsernameNotFoundException(username));
 
+		System.out.println("member.toString() = " + member.toString());
+
         return new User(member.getEmployeeNumber(), member.getPassword(), authorities(member.getRoles()));
     }
 
@@ -61,7 +64,7 @@ public class MemberService implements UserDetailsService {
 		boolean enabled = true;
 
 		//사용여부
-		if(memberDto.getEnableString().equals("N")) {
+		if(StringUtils.isEmpty(memberDto.getEnableString()) || memberDto.getEnableString().equals("N")) {
 			enabled = false;
 		}
 

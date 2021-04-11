@@ -1,23 +1,23 @@
 package me.myclude.calculator.members.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import me.myclude.calculator.members.dto.MemberDto;
+import me.myclude.calculator.members.entity.Member;
+import me.myclude.calculator.members.entity.MemberRole;
+import me.myclude.calculator.members.entity.Role;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import me.myclude.calculator.members.dto.MemberDto;
-import me.myclude.calculator.members.entity.Member;
-import me.myclude.calculator.members.entity.MemberRole;
-import me.myclude.calculator.members.entity.Role;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -33,20 +33,30 @@ class MemberServiceTest {
     @Autowired
     MemberRoleService memberRoleService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    public void initRole() {
+
+        Role role1 = new Role("ADMIN");
+        Role role2 = new Role("USER");
+
+        roleService.save(role1);
+        roleService.save(role2);
+
+    }
+
     @Test
     @DisplayName("계정이 정상적으로 생성이 되는가?")
     public void findByUsername()  {
 
         //given
         String password = "1234";
-        String username = "5800871";
+        String username = "B12345";
 
-        Role role = Role.builder()
-                .name("ADMIN")
-                .build();
+        Role role = roleService.findByName("ADMIN");
 
-        Role saveRole = roleService.save(role);
-        
         MemberDto memberDto = MemberDto.builder()
                 .username("naggeon")
                 .email("nk.sung@gmail.com")
@@ -55,20 +65,19 @@ class MemberServiceTest {
                 .language("KO")
                 .password(password)
                 .phoneNumber("010-0000-0000")
+                .enableString("Y")
                 .build();
 
         Member saveMember = memberService.save(memberDto);
-
-        MemberRole memberRole = MemberRole.createMember(saveMember, saveRole);
+        MemberRole memberRole = MemberRole.createMember(saveMember, role);
 
         memberRoleService.save(memberRole);
 
         //when
-        UserDetailsService userDetailsService = memberService;
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = memberService.loadUserByUsername(username);
 
         //then
-        assertThat(userDetails.getPassword()).isEqualTo(password);
+        assertThat(passwordEncoder.matches(password, userDetails.getPassword())).isTrue();
     }
 
 

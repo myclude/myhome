@@ -16,6 +16,7 @@ import java.util.List;
         sequenceName = "MEMBER_SEQ"
 )
 @Table(name = "PROMLUSR")
+@ToString(of = {"memberId", "employeeNumber", "password", "username"})
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
